@@ -1,0 +1,23 @@
+<?php defined('SYSPATH') or die('No direct script access.'); ?>
+
+2009-09-10 01:00:04 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, favicon.ico, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 01:00:06 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, favicon.ico, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 01:09:41 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, favicon.ico, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 16:40:14 +04:00 --- error: Не пойманное PHP Error: Argument 1 passed to Auth_User_Model::validate() must be an array, object given, called in Z:\home\fairplay\www\application\models\user.php on line 16 and defined в файле Z:/home/fairplay/www/modules/auth/models/auth_user.php, на строке 30
+2009-09-10 16:41:24 +04:00 --- error: Не пойманное PHP Error: Argument 1 passed to Auth_User_Model::validate() must be an array, object given, called in Z:\home\fairplay\www\application\models\user.php on line 16 and defined в файле Z:/home/fairplay/www/modules/auth/models/auth_user.php, на строке 30
+2009-09-10 16:42:28 +04:00 --- error: Не пойманное PHP Error: Argument 1 passed to Auth_User_Model::validate() must be an array, object given, called in Z:\home\fairplay\www\application\models\user.php on line 15 and defined в файле Z:/home/fairplay/www/modules/auth/models/auth_user.php, на строке 30
+2009-09-10 16:46:52 +04:00 --- error: Не пойманное PHP Error: Argument 1 passed to Auth_User_Model::validate() must be an array, object given, called in Z:\home\fairplay\www\application\models\user.php on line 15 and defined в файле Z:/home/fairplay/www/modules/auth/models/auth_user.php, на строке 30
+2009-09-10 16:48:12 +04:00 --- error: Не пойманное PHP Error: Argument 1 passed to Auth_User_Model::validate() must be an array, object given, called in Z:\home\fairplay\www\application\models\user.php on line 15 and defined в файле Z:/home/fairplay/www/modules/auth/models/auth_user.php, на строке 30
+2009-09-10 16:57:53 +04:00 --- error: Не пойманное PHP Error: Argument 1 passed to Auth_User_Model::login() must be an array, object given, called in Z:\home\fairplay\www\application\controllers\user.php on line 27 and defined в файле Z:/home/fairplay/www/modules/auth/models/auth_user.php, на строке 56
+2009-09-10 16:59:07 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, user/registerok, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 16:59:12 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, user, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 16:59:15 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 19:54:52 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 20:46:18 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 20:57:44 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 21:06:26 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 21:12:44 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 21:17:19 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 21:28:25 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, welcome, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 21:39:32 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, admin, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841
+2009-09-10 21:39:41 +04:00 --- error: Не пойманное Kohana_404_Exception: Запрошенная страница, admin, не найдена. в файле Z:/home/fairplay/www/system/core/Kohana.php, на строке 841

@@ -1,0 +1,146 @@
+BODY {
+	background: url('/templates/template/img/bg_main.png');
+	font-family: 'Trebuchet MS';
+}
+
+html {height: 100%}
+body {
+	width: 100%;
+	height: 100%;
+}
+
+#center {
+	width:900px;
+	background: url('/templates/template/img/bg_body.png') repeat-y;
+	margin: 0px auto;
+	padding: 0px 19px;
+}
+
+#head {
+	height: 150px;
+	background: url('/templates/template/img/logo.jpg');
+}
+
+#menu {
+	height: 30px;
+}
+
+#menu div {
+	height: 29px;
+}
+
+#menu_left {
+	width: 12px;
+	background: url('/templates/template/img/bg_menu_left.png');
+	float: left;
+}
+
+#menu_center {
+	width: 876px;
+	background: url('/templates/template/img/bg_menu_center.png');
+	float: left;
+	padding-top: 1px;
+}
+
+#menu_right {
+	width: 12px;
+	background: url('/templates/template/img/bg_menu_right.png');
+	float: left;
+}
+
+#menu div a.menu_button {
+	font-size: 17px;
+	font-family:sans-serif;
+	margin-right: 15px;
+	color:silver;
+	text-decoration: none;
+}
+
+#menu div a.menu_button:hover {
+	color:aqua;
+}
+
+#sidebar {
+	background-color:#faf8f8;
+}
+
+/* Middle
+-----------------------------------------------------------------------------*/
+#middle {
+	border-left: 200px solid #faf8f8;
+	height: 1%;
+}
+#middle:after {
+	content: '.';
+	display: block;
+	clear: both;
+	visibility: hidden;
+	height: 0;
+}
+#container {
+	width: 100%;
+	float: left;
+	overflow: hidden;
+	margin-right: -100%;
+}
+#content {
+	padding: 0 20px;
+}
+
+/* Sidebar Left
+-----------------------------------------------------------------------------*/
+.sl {
+	float: left;
+	width: 200px;
+	position: relative;
+	background: #faf8f8;
+	left: -200px;
+}
+
+#footer {
+	height: 100px;
+	background: #BFF08E;
+}
+
+
+/* Tables
+-----------------------------------------------------------------------------*/
+table {
+	background-color: #d0d0d0;
+	font-size: 12px;
+	min-width: 50%;
+}
+
+thead tr {
+	background-color: #D3E1EC;
+	background-image: url('/templates/template/img/table-title-bg.jpg');
+}
+
+tr.nechet {
+	background: #ffffff;
+}
+
+tr.chet {
+	background: #eef4fa;
+}
+
+td {
+	padding: 0px 2px;
+}
+
+td.number {
+	width: 15px;
+}
+
+a.team {
+	text-decoration:none;
+}
+
+hr {
+	background:green;
+	margin-top: 10px;
+}
+
+table a.player {
+	text-decoration: none;
+}
