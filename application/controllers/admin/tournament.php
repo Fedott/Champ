@@ -51,4 +51,14 @@
 			$this->template->content->form = $form;
 			$this->template->content->errors = $errors;
 		}
+
+		public function view($url)
+		{
+			$tournament = ORM::factory('table', $url);
+
+			$this->template->title = "Администрирование турнира: ".$tournament->name;
+			$this->template->content = new View('admin/view_tournament');
+			$this->template->content->tournament = $tournament;
+			$this->template->content->i = 1;
+		}
 	}
