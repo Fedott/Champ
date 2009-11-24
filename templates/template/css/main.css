@@ -1,6 +1,6 @@
 BODY {
 	background: url('/templates/template/img/bg_main.png');
-	font-family: 'Trebuchet MS';
+	font-family: 'Trebuchet MS',Arial,SansSerif;
 }
 
 html {height: 100%}
