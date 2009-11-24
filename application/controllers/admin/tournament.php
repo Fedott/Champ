@@ -61,4 +61,41 @@
 			$this->template->content->tournament = $tournament;
 			$this->template->content->i = 1;
 		}
+
+		public function adds($tid)
+		{
+			$tournament = ORM::factory('table', $tid);
+//			$teams = ORM::factory('team')->find_all();
+			$teams = ORM::factory('team')->orderby('name')->find_all();
+
+			if($_POST)
+			{
+				foreach ($_POST['teams'] as $teamid)
+				{
+					$line = ORM::factory('line')->where(array('team_id' => $teamid, 'table_id' => $tournament->id))->find();
+					if(!$line->loaded)
+					{
+						$line = ORM::factory('line');
+						$line->team_id = $teamid;
+						$line->table_id = $tournament->id;
+						$line->save();
+					}
+				}
+				$tournament->save();
+				url::redirect('admin/tournament/view/'.$tournament->id);
+			}
+
+//			echo Kohana::debug($teams);
+
+			$this->template->title = "Редактирование команд участников турнира: ". $tournament->name;
+			$this->template->content = new View('admin/adds_tournament');
+			$this->template->content->teams = $teams;
+			$this->template->content->tournament = $tournament;
+		}
+
+		public function test()
+		{
+			$line = ORM::factory('line')->where(array('team_id' => 2, 'table_id' => 2))->find();
+			echo Kohana::debug($line);
+		}
 	}
