@@ -17,4 +17,38 @@
 			$this->template->content->tournaments = $tournamets;
 			$this->template->content->i = 1;
 		}
+
+		public function edit($tid = NULL)
+		{
+			$tournament = ORM::factory('table', $tid);
+
+			$form = array(
+				'name'	=> '',
+			);
+			$errors = array();
+
+			if($tournament->loaded)
+			{
+				$form = arr::overwrite($form, $tournament->as_array());
+			}
+
+			if($_POST)
+			{
+				$data = arr::overwrite($form, $_POST);
+
+				$tournament->validate($data);
+				$errors = $data->errors('edit_tournament');
+				if(empty ($errors))
+				{
+					$tournament->url = translit::getTranslit($tournament->name);
+					$tournament->save();
+					url::redirect('/admin/tournament/view/'.$tournament->id);
+				}
+			}
+
+			$this->template->title = "Редактирование команды";
+			$this->template->content = new View('admin/edit_tournament');
+			$this->template->content->form = $form;
+			$this->template->content->errors = $errors;
+		}
 	}
