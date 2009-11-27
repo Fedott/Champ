@@ -144,3 +144,19 @@ hr {
 	background:green;
 	margin-top: 10px;
 }
+
+/**
+ * Менюшные стили
+ */
+
+a.logout {
+	 font-size: 10px;
+}
+
+div#sidebar p {
+	font-size: 12px;
+}
+
+div#sidebar li {
+	font-size: 12px;
+}
