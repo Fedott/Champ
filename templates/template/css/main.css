@@ -128,8 +128,12 @@ td {
 	padding: 0px 2px;
 }
 
-td.number {
-	width: 15px;
+th {
+	padding: 0px 2px;
+}
+
+table a {
+	text-decoration: none;
 }
 
 a.team {
@@ -139,8 +143,4 @@ a.team {
 hr {
 	background:green;
 	margin-top: 10px;
-}
-
-table a {
-	text-decoration: none;
 }

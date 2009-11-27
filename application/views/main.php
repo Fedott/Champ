@@ -2,3 +2,4 @@
 Главная страница
 <br>
 <?=html::anchor('tournament', "Турниры");?>
+<?=html::anchor('match', 'Матчи');?>
