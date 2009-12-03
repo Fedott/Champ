@@ -158,5 +158,7 @@ div#sidebar p {
 }
 
 div#sidebar li {
-	font-size: 12px;
+	font-size: 11px;
+	list-style: none;
+	margin-left: 4px;
 }
