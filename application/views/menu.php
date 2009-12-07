@@ -6,7 +6,7 @@
 <p>
 	Ваши команды:
 </p>
-<ul>
+<ul class="menu_teams">
 <?foreach($teams as $team):?>
 	<li>
 		<?=$team->team->name;?> (<?=$team->table->name;?>)
