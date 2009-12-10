@@ -81,7 +81,7 @@ body {
 	width: 100%;
 	float: left;
 	overflow: hidden;
-	margin-right: -100%;
+	/*margin-right: -100%;*/
 }
 #content {
 	padding: 0 20px;
@@ -161,4 +161,10 @@ div#sidebar li {
 	font-size: 11px;
 	list-style: none;
 	margin-left: 4px;
+}
+
+ul.vmenu {
+	font-size: 12px;
+	border: 1px solid gray;
+	padding: 3px;
 }
