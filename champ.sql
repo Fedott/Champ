@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.3
+-- version 3.2.4
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Дек 03 2009 г., 14:38
--- Версия сервера: 5.1.37
--- Версия PHP: 5.2.10-2ubuntu6.1
+-- Время создания: Дек 26 2009 г., 22:37
+-- Версия сервера: 5.0.45
+-- Версия PHP: 5.2.4
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -16,7 +16,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- База данных: `fairplay`
+-- База данных: `champ`
 --
 
 -- --------------------------------------------------------
@@ -26,11 +26,16 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `goals` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `match_id` int(11) unsigned DEFAULT NULL,
-  `player_id` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `match_id` int(11) unsigned default NULL,
+  `player_id` int(11) unsigned default NULL,
+  PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `goals`
+--
+
 
 -- --------------------------------------------------------
 
@@ -39,17 +44,22 @@ CREATE TABLE IF NOT EXISTS `goals` (
 --
 
 CREATE TABLE IF NOT EXISTS `lines` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `table_id` int(11) unsigned DEFAULT NULL,
-  `team_id` int(11) unsigned DEFAULT NULL,
-  `user_id` int(11) unsigned DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `table_id` int(11) unsigned default NULL,
+  `team_id` int(11) unsigned default NULL,
+  `user_id` int(11) unsigned default NULL,
   `games` int(11) NOT NULL,
   `win` int(11) NOT NULL,
   `lose` int(11) NOT NULL,
   `win_points` int(11) NOT NULL,
   `lose_points` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `lines`
+--
+
 
 -- --------------------------------------------------------
 
@@ -58,15 +68,20 @@ CREATE TABLE IF NOT EXISTS `lines` (
 --
 
 CREATE TABLE IF NOT EXISTS `matches` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `date` int(11) unsigned DEFAULT NULL,
-  `home_id` int(11) unsigned DEFAULT NULL,
-  `away_id` int(11) unsigned DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `date` int(11) unsigned default NULL,
+  `home_id` int(11) unsigned default NULL,
+  `away_id` int(11) unsigned default NULL,
   `home_goals` int(10) unsigned NOT NULL,
   `away_goals` int(10) unsigned NOT NULL,
   `confirm` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `matches`
+--
+
 
 -- --------------------------------------------------------
 
@@ -75,13 +90,18 @@ CREATE TABLE IF NOT EXISTS `matches` (
 --
 
 CREATE TABLE IF NOT EXISTS `players` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(70) DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `first_name` varchar(70) default NULL,
   `last_name` varchar(70) NOT NULL,
   `birstday` varchar(8) NOT NULL,
-  `team_id` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+  `team_id` int(11) unsigned default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `players`
+--
+
 
 -- --------------------------------------------------------
 
@@ -90,12 +110,12 @@ CREATE TABLE IF NOT EXISTS `players` (
 --
 
 CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(32) NOT NULL,
   `description` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `roles`
@@ -114,9 +134,17 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 CREATE TABLE IF NOT EXISTS `roles_users` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
+  PRIMARY KEY  (`user_id`,`role_id`),
   KEY `fk_role_id` (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `roles_users`
+--
+
+INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
+(1, 1),
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -125,12 +153,17 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
 --
 
 CREATE TABLE IF NOT EXISTS `tables` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(150) NOT NULL,
-  `year` int(4) unsigned DEFAULT NULL,
+  `year` int(4) unsigned default NULL,
   `url` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `tables`
+--
+
 
 -- --------------------------------------------------------
 
@@ -139,11 +172,17 @@ CREATE TABLE IF NOT EXISTS `tables` (
 --
 
 CREATE TABLE IF NOT EXISTS `teams` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   `url` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `teams`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -151,29 +190,29 @@ CREATE TABLE IF NOT EXISTS `teams` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL auto_increment,
   `email` varchar(127) NOT NULL,
-  `username` varchar(32) NOT NULL DEFAULT '',
+  `username` varchar(32) NOT NULL default '',
   `password` char(50) NOT NULL,
-  `logins` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_login` int(10) unsigned DEFAULT NULL,
+  `logins` int(10) unsigned NOT NULL default '0',
+  `last_login` int(10) unsigned default NULL,
   `icq` varchar(12) NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(30) NOT NULL,
   `www` varchar(50) NOT NULL,
   `like_club` varchar(50) NOT NULL,
   `like_player` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_login`, `icq`, `first_name`, `last_name`, `www`, `like_club`, `like_player`) VALUES
-(1, 'fedotru@gmail.com', 'Федот', '757c21b6fee9f737ee6c803f12fb902f084cafcb57236c9c18', 25, 1259840293, '7372085', '', 'Ը', 'http://www.fifafairplay.ru', '', '');
+(1, 'admin@champ.ru', 'admin', 'c6045fe4bd14fa438a87cdf9e2fcb7c364ee89323b08382fc3', 3, 1261855890, '000000', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -182,13 +221,18 @@ INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_logi
 --
 
 CREATE TABLE IF NOT EXISTS `user_tokens` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL auto_increment,
   `user_id` int(11) unsigned NOT NULL,
   `user_agent` varchar(40) NOT NULL,
   `token` varchar(32) NOT NULL,
   `created` int(10) unsigned NOT NULL,
   `expires` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_token` (`token`),
   KEY `fk_user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Дамп данных таблицы `user_tokens`
+--
+
