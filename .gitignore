@@ -1,4 +1,6 @@
 *.*~
 logs
-config/config.php
-config/database.php
+application/config/config.php
+application/config/database.php
+nbproject
+logo.jpg
