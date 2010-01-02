@@ -31,6 +31,7 @@
 			{
 				if($limit){
 					$return = text::limit_chars($this->first_name, 1, '.');
+					$return.= $this->last_name;
 				}
 				else
 				{
