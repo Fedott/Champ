@@ -9,5 +9,5 @@ $config['_default'] = 'main';
 $config['admin'] = 'admin/main';
 
 $config['reg'] = 'user/register';
-$config['loguot'] = 'user/logout';
+$config['logout'] = 'user/logout';
 $config['login'] = 'user/login';

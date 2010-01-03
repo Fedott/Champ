@@ -15,7 +15,8 @@
 			}
 			else
 			{
-				$tpl = "<a href='/user/login'>Войдите</a> на сайт";
+				$tpl = html::anchor('login', 'Войдите')." на сайт";
+				$tpl.= "<br>Или ".html::anchor('reg', 'зарегистрируйтесь');
 			}
 
 			return $tpl;

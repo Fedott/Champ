@@ -69,6 +69,7 @@ body {
 #middle {
 	border-left: 200px solid #faf8f8;
 	height: 1%;
+	min-height: 700px;
 }
 #middle:after {
 	content: '.';
