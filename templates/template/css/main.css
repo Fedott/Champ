@@ -124,6 +124,10 @@ tr.chet {
 	background: #eef4fa;
 }
 
+tr.my_team {
+	background: PaleGreen;
+}
+
 td {
 	padding: 0px 2px;
 }
@@ -167,4 +171,8 @@ ul.vmenu {
 	font-size: 12px;
 	border: 1px solid gray;
 	padding: 3px;
+}
+
+ul.my_teams a {
+	text-decoration: none;
 }

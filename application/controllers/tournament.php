@@ -15,10 +15,12 @@
 		public function view($url)
 		{
 			$tournament = ORM::factory('table', $url);
+			$uchastie = (bool)count(ORM::factory('line')->where(array('user_id' => $this->user->id, 'table_id' => $tournament->id))->find_all());
 
 			$this->template->title = "Турнир: ".$tournament->name;
 			$this->template->content = new View('view_tournament');
 			$this->template->content->tournament = $tournament;
 			$this->template->content->i = 1;
+			$this->template->content->uchastie = $uchastie;
 		}
 	}

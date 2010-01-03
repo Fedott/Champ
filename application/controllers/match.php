@@ -16,19 +16,26 @@
 		public function index()
 		{
 			$uncmatches = ORM::factory('match')->with('home')->with('away')->where(array('confirm' => 0, 'away.user_id' => $this->user->id))->find_all();
+			$uncymatches = ORM::factory('match')->with('home')->with('away')->where(array('confirm' => 0, 'home.user_id' => $this->user->id))->find_all();
 			$matches = ORM::factory('match')->with('home')->with('away')->where(array('confirm' => 1, 'home.user_id' => $this->user->id))->find_all();
 			$matches_a = ORM::factory('match')->with('home')->with('away')->where(array('confirm' => 1, 'away.user_id' => $this->user->id))->find_all();
 //			echo Kohana::debug($matches);
 			$this->template->title = "Ваши матчи";
 			$this->template->content = new View('match');
 			$this->template->content->uncmatches = $uncmatches;
+			$this->template->content->uncymatches = $uncymatches;
 			$this->template->content->matches = $matches;
 			$this->template->content->matches_a = $matches_a;
 		}
 
-		public function reg($tourn = 2)
+		public function reg($tourn)
 		{
 			$match = ORM::factory('match');
+			$myline = ORM::factory('line')->where(array('user_id' => $this->user->id , 'table_id' => $tourn))->find();
+			if(!$myline->loaded)
+			{
+				url::redirect('match/err');
+			}
 
 			$form = array(
 				'away_id' => '',
@@ -49,6 +56,7 @@
 				if(empty($errors))
 				{
 					$match->date = time();
+					$match->table_id = $tourn;
 					$match->save();
 					url::redirect('match');
 				}
@@ -58,11 +66,18 @@
 				}
 			}
 
-			$teams = ORM::factory('line')->where(array('user_id != ' => $this->user->id , 'table_id' => $tourn))->find_all();
+			$teams = ORM::factory('line')->where(array('user_id != ' => $this->user->id, 'table_id' => $tourn))->find_all();
+			$my_matches = ORM::factory('match')->where(array('home_id' => $this->user->id, 'table_id' => $tourn))->find_all();
+
 			$tarr = array();
 			foreach($teams as $team)
 			{
-				$tarr[$team->id] = $team->team->name;
+				$tarr[$team->id] = $team->team->name." (".$team->user->username.")";
+			}
+
+			foreach ($my_matches as $my_match)
+			{
+				arr::remove($my_match->away_id, $tarr);
 			}
 
 			$uteam = ORM::factory('line')->where(array('user_id' => $this->user->id, 'table_id' => $tourn))->find();
@@ -98,6 +113,35 @@
 			$match = ORM::factory('match', $mid);
 			if($match->loaded AND $match->away->user_id == $this->user->id AND $match->confirm == 0)
 			{
+				$home = ORM::factory('line', $match->home_id);
+				$away = ORM::factory('line', $match->away_id);
+				$home->goals += $match->home_goals;
+				$away->goals += $match->away_goals;
+				$home->passed_goals += $match->away_goals;
+				$away->passed_goals += $match->home_goals;
+				if($match->home_goals == $match->away_goals)
+				{
+					$home->points += 1;
+					$away->points += 1;
+					$home->drawn++;
+					$away->drawn++;
+				}
+				elseif ($match->home_goals > $match->away_goals)
+				{
+					$home->points += 3;
+					$home->win++;
+					$away->lose++;
+				}
+				elseif ($match->home_goals < $match->away_goals)
+				{
+					$away->points += 3;
+					$home->lose++;
+					$away->win++;
+				}
+				$home->games++;
+				$away->games++;
+				$home->save();
+				$away->save();
 				$match->confirm = 1;
 				$match->save();
 				url::redirect('match');

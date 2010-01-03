@@ -12,10 +12,10 @@
 <p>
 	Ваши команды:
 </p>
-<ul>
+<ul class="my_teams">
 <?foreach($teams as $team):?>
 	<li>
-		<?=$team->team->name;?> (<?=$team->table->name;?>)
+		<?=$team->team->name;?> (<?=html::anchor('tournament/view/'.$team->table->url, $team->table->name);?>)
 	</li>
 <?endforeach;?>
 </ul>

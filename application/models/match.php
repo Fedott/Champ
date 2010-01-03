@@ -2,7 +2,7 @@
     
     class Match_Model extends ORM
 	{
-		protected $has_one = array('home' => 'line', 'away' => 'line');
+		protected $has_one = array('home' => 'line', 'away' => 'line', 'table');
 
 		public function validate(array & $array, $save = FALSE)
 		{

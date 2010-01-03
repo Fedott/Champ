@@ -6,19 +6,29 @@
 			<th>№</th>
 			<th>Команда</th>
 			<th>Побед</th>
+			<th>Ничьих</th>
 			<th>Поражений</th>
-			<th>Набрано</th>
-			<th>Потеряно</th>
+			<th>Забито</th>
+			<th>Пропущено</th>
+			<th>Разница</th>
+			<th>Очков</th>
 		</tr>
 	</thead>
 	<?foreach ($tournament->lines as $line):?>
-	<tr class="<?=(($i%2)==0)?'chet':'nechet'?>">
+	<tr class="<?=(($i%2)==0)?'chet':'nechet'?><?=($line->user_id == $this->user->id)?' my_team':'';?>">
 		<td><?=$i++?></td>
 		<td><?=$line->team->name?></td>
 		<td><?=$line->win?></td>
+		<td><?=$line->drawn?></td>
 		<td><?=$line->lose?></td>
-		<td><?=$line->win_points?></td>
-		<td><?=$line->lose_points?></td>
+		<td><?=$line->goals?></td>
+		<td><?=$line->passed_goals?></td>
+		<td><?=$line->goals - $line->passed_goals?></td>
+		<td><?=$line->points?></td>
 	</tr>
 	<?endforeach;?>
 </table>
+<?if($uchastie):?>
+<hr>
+<?=html::anchor('match/reg/'.$tournament->id, 'Зарегистрировать матч');?>
+<?endif;?>

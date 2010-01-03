@@ -64,6 +64,7 @@
 
 		public function adds($tid)
 		{
+// TODO: Сделать нормально добавление/удаление команд. При добавлении не выводить уже добавленные команды, а то некрасиво.
 			$tournament = ORM::factory('table', $tid);
 //			$teams = ORM::factory('team')->find_all();
 			$teams = ORM::factory('team')->orderby('name')->find_all();
