@@ -46,6 +46,12 @@
 			$this->template->content->errors = $errors;
 		}
 
+		public function register_ok()
+		{
+			$this->template->title = "Регистрация прошла успешно";
+			$this->template->content = "<h2>Регистрация прошла успешно</h2><br>".html::anchor('main', "Главная страница");
+		}
+
 		public function login()
 		{
 			if(Auth::instance()->logged_in())
