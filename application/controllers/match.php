@@ -48,16 +48,65 @@
 
 			if($_POST)
 			{
+				$errors_lang_file = 'match_reg';
 				$post = arr::overwrite($form, $_POST);
 
 				$match->validate($post);
-				$errors = $post->errors();
+				$errors = $post->errors($errors_lang_file);
+
+				$val_goals_h = 0;
+				foreach($_POST['goals_h'] as $gg)
+				{
+					if(!empty($gg[1]))
+						$val_goals_h += $gg[1];
+				}
+				$val_goals_a = 0;
+				if(isset($_POST['goals_a']))
+				{
+					foreach ($_POST['goals_a'] as $gg)
+					{
+						if(!empty($gg[1]))
+							$val_goals_a += $gg[1];
+					}
+				}
+				if($match->home_goals != $val_goals_h || $match->away_goals != $val_goals_a)
+				{
+					$errors[] = Kohana::lang("$errors_lang_file.goals.not_aval");
+				}
 
 				if(empty($errors))
 				{
 					$match->date = time();
 					$match->table_id = $tourn;
 					$match->save();
+					foreach ($_POST['goals_h'] as $gg)
+					{
+						if(!empty ($gg[1]))
+						{
+							$tmp = ORM::factory('goal');
+							$tmp->table_id	= $tourn;
+							$tmp->player_id	= $gg[0];
+							$tmp->count		= $gg[1];
+							$tmp->match_id	= $match->id;
+							$tmp->line_id	= $match->home_id;
+							$tmp->save();
+							$tmp = NULL;
+						}
+					}
+					foreach ($_POST['goals_a'] as $gg)
+					{
+						if(!empty ($gg[1]))
+						{
+							$tmp = ORM::factory('goal');
+							$tmp->table_id	= $tourn;
+							$tmp->player_id	= $gg[0];
+							$tmp->count		= $gg[1];
+							$tmp->match_id	= $match->id;
+							$tmp->line_id	= $match->away_id;
+							$tmp->save();
+							$tmp = NULL;
+						}
+					}
 					url::redirect('match');
 				}
 				else
@@ -69,7 +118,7 @@
 			$teams = ORM::factory('line')->where(array('user_id != ' => $this->user->id, 'table_id' => $tourn))->find_all();
 			$my_matches = ORM::factory('match')->where(array('home_id' => $this->user->id, 'table_id' => $tourn))->find_all();
 
-			$tarr = array();
+			$tarr = array('NULL' => 'Выберите команду соперника');
 			foreach($teams as $team)
 			{
 				$tarr[$team->id] = $team->team->name." (".$team->user->username.")";
@@ -80,6 +129,13 @@
 				arr::remove($my_match->away_id, $tarr);
 			}
 
+			$players = ORM::factory('player')->where(array('team_id' => $myline->team_id))->find_all();
+			$plarr = array('NULL' => 'Выбирете игрока');
+			foreach ($players as $player)
+			{
+				$plarr[$player->id] = $player->name();
+			}
+
 			$uteam = ORM::factory('line')->where(array('user_id' => $this->user->id, 'table_id' => $tourn))->find();
 
 			$this->template->title = "Регистрация матча";
@@ -88,6 +144,7 @@
 			$this->template->content->errors = $errors;
 			$this->template->content->teams = $tarr;
 			$this->template->content->uteam = $uteam;
+			$this->template->content->my_team_players = $plarr;
 		}
 
 		public function confirm($mid)
@@ -151,5 +208,31 @@
 				$this->template->title = "Не мухлюй!";
 				$this->template->content = "<h1 style='color: red'>Не мухлюй!</h1>";
 			}
+		}
+
+		public function get_away_team_players($tid)
+		{
+			if(!request::is_ajax() || $tid == 'NULL')
+				exit;
+
+			$this->auto_render = FALSE;
+
+			$players = ORM::factory('player')->where(array('team_id' => ORM::factory('line', $tid)->team_id))->find_all();
+			$plarr = array('NULL' => 'Выбирете игрока');
+			foreach ($players as $player)
+			{
+				$plarr[$player->id] = $player->name();
+			}
+
+			$view = new View('ajax/away_team_players_goal');
+			$view->team_players = $plarr;
+			$view->render(TRUE);
+		}
+
+		public function test()
+		{
+			echo Kohana::debug($_POST);
+			$this->template->title = 2;
+			$this->template->content = '';
 		}
 	}

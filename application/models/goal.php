@@ -2,5 +2,5 @@
     
     class Goal_Model extends ORM
 	{
-		protected $belongs_to = array('player', 'match');
+		protected $belongs_to = array('player', 'match', 'table', 'line');
 	}

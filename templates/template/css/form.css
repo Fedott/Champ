@@ -53,6 +53,15 @@ input.medium, select.medium {
 	width:50%;
 }
 
+select.mini {
+	width:75%;
+}
+
+input.mini {
+	width: 25px;
+	text-align: center;
+}
+
 input.text, input.search, textarea.textarea {
 	-moz-background-clip:border;
 	-moz-background-inline-policy:continuous;
@@ -111,4 +120,18 @@ form li div.input_left {
 
 form li div.input_right {
 	float:left;
+}
+
+div.form_left {
+	width: 40%;
+	float:left;
+}
+
+div.form_right {
+	width: 40%;
+	float:left;
+}
+
+div.player_select {
+	margin-bottom: 1px;
 }

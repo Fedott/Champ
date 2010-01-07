@@ -10,6 +10,7 @@
 		));?>
 	<?=html::script(array(
 			'templates/template/js/jquery',
+			'templates/template/js/jquery.listen',
 			'templates/template/js/main',
 		));?>
 </head>

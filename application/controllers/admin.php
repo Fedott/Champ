@@ -5,5 +5,9 @@
 		public function  __construct()
 		{
 			parent::__construct();
+			if(!$this->auth->logged_in('admin'))
+			{
+				url::redirect('main');
+			}
 		}
 	}
