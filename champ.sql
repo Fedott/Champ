@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Янв 03 2010 г., 16:50
+-- Время создания: Янв 08 2010 г., 12:51
 -- Версия сервера: 5.0.45
 -- Версия PHP: 5.2.4
 
@@ -23,13 +23,11 @@ CREATE TABLE IF NOT EXISTS `goals` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `match_id` int(11) unsigned default NULL,
   `player_id` int(11) unsigned default NULL,
+  `table_id` int(11) NOT NULL,
+  `line_id` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Дамп данных таблицы `goals`
---
-
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -50,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `lines` (
   `passed_goals` int(11) NOT NULL,
   `points` int(11) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -68,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `matches` (
   `away_goals` int(10) unsigned NOT NULL,
   `confirm` tinyint(1) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -83,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `birstday` varchar(8) NOT NULL,
   `team_id` int(11) unsigned default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -97,15 +95,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `description` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Дамп данных таблицы `roles`
---
-
-INSERT INTO `roles` (`id`, `name`, `description`) VALUES
-(1, 'login', 'Login privileges, granted after account confirmation'),
-(2, 'admin', 'Administrative user, has access to everything.');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -120,14 +110,6 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
   KEY `fk_role_id` (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `roles_users`
---
-
-INSERT INTO `roles_users` (`user_id`, `role_id`) VALUES
-(1, 1),
-(1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -140,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `tables` (
   `year` int(4) unsigned default NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -153,7 +135,7 @@ CREATE TABLE IF NOT EXISTS `teams` (
   `name` varchar(50) NOT NULL,
   `url` varchar(255) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -177,14 +159,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `logins`, `last_login`, `icq`, `first_name`, `last_name`, `www`, `like_club`, `like_player`) VALUES
-(1, 'admin@champ.ru', 'admin', 'c6045fe4bd14fa438a87cdf9e2fcb7c364ee89323b08382fc3', 7, 1262513089, '000000', '', '', '', '', '');
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -202,9 +177,4 @@ CREATE TABLE IF NOT EXISTS `user_tokens` (
   PRIMARY KEY  (`id`),
   UNIQUE KEY `uniq_token` (`token`),
   KEY `fk_user_id` (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `user_tokens`
---
-
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
