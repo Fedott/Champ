@@ -5,6 +5,7 @@ $lang = array(
 		'default' => '',
 		'required' => '',
 		'numeric' => '',
+		'_allready_plays' => 'Вы уже сыграли домашний матч с этим соперником',
 	),
 	'away_id' => array(
 		'default' => 'Вы не указали команду соперника',
