@@ -116,7 +116,7 @@
 			}
 
 			$teams = ORM::factory('line')->where(array('user_id != ' => $this->user->id, 'table_id' => $tourn))->find_all();
-			$my_matches = ORM::factory('match')->where(array('home_id' => $this->user->id, 'table_id' => $tourn))->find_all();
+			$my_matches = ORM::factory('match')->where(array('home_id' => $myline->id, 'table_id' => $tourn))->find_all();
 
 			$tarr = array('NULL' => 'Выберите команду соперника');
 			foreach($teams as $team)
