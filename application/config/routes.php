@@ -4,7 +4,7 @@
  *
  * Sets the default route to "welcome"
  */
-$config['_default'] = 'main';
+$config['_default'] = 'news';
 
 $config['admin'] = 'admin/main';
 

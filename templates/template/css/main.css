@@ -177,3 +177,33 @@ ul.vmenu {
 ul.my_teams a {
 	text-decoration: none;
 }
+
+
+/**
+ *	Новости
+ */
+h1.news {
+	 font-size: x-large;
+}
+
+div.news_short_header a {
+	text-decoration: none;
+}
+
+div.news_short_header{
+	float: left;
+}
+
+div.news_short {
+	margin-bottom: 10px;
+	background-color: #F7FFF4;
+}
+
+div.news_short_info {
+	text-align: right;
+	font-size: 11px;
+}
+
+div.news_short_body {
+	clear: both;
+}
