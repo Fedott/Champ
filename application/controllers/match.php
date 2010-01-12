@@ -235,4 +235,15 @@
 			$this->template->title = 2;
 			$this->template->content = '';
 		}
+
+		public function view($id)
+		{
+			$match = ORM::factory('match', $id);
+
+			$view = new View('match_view');
+			$view->match = $match;
+
+			$this->template->title = "Просмотр матча ".$match->home->team->name." - ".$match->away->team->name;
+			$this->template->content = $view;
+		}
 	}

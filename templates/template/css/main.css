@@ -208,3 +208,31 @@ div.news_short_info {
 div.news_short_body {
 	clear: both;
 }
+
+/**
+ * Страница матча
+ */
+div.home_team_ava {
+	float: left;
+}
+
+div.match_result {
+	float: left;
+}
+
+div.away_team_ava {
+	float: left;
+}
+
+div.home_team_name {
+	clear: right;
+	float: left;
+	margin-right: 10px;
+	border: solid 2px;
+}
+
+div.away_team_name {
+	float: left;
+	margin-left: 10px;
+	border: solid 2px;
+}
