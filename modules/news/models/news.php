@@ -3,6 +3,8 @@
 	class News_Model extends ORM
 	{
 
+		protected $sorting = array('created' => 'desc');
+
 		public function unique_key($id)
 		{
 			if(!empty($id) && !ctype_digit($id) && is_string($id))
