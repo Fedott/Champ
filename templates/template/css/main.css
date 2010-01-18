@@ -214,25 +214,94 @@ div.news_short_body {
  */
 div.home_team_ava {
 	float: left;
+	width: 300px;
+	border: solid #CDCDCD 1px;
 }
 
 div.match_result {
 	float: left;
+	font-size: 20px;
+	width: 40px;
+	border: solid #CDCDCD 1px;
 }
 
 div.away_team_ava {
 	float: left;
+	width: 300px;
+	text-align: right;
+	border: solid #CDCDCD 1px;
+}
+
+table.match {
+	border-spacing: 0;
+	width: 100%;
+	height: 100px;
+	background: none;
+}
+
+td.home_team_ava {
+	width: 100px;
+	padding: 0px;
+}
+
+td.match_result {
+	text-align: center;
+	font-size: 40px;
+	font-weight: 600;
+	padding: 0px;
+}
+
+td.away_team_ava {
+	width: 100px;
+	padding: 0px;
 }
 
 div.home_team_name {
-	clear: right;
+	clear: left;
 	float: left;
 	margin-right: 10px;
-	border: solid 2px;
+	border: double 3px;
+	width: 305px;
 }
 
 div.away_team_name {
 	float: left;
 	margin-left: 10px;
-	border: solid 2px;
+	border: double 3px;
+	width: 305px;
+	text-align: right;
+}
+
+img.team_logo {
+	width: 130px;
+	height: 130px;
+}
+
+div.match_date {
+	font-size: 14px;
+}
+
+div.match_teams {
+	font-size: 25px;
+}
+
+table.match_teams {
+	font-size: 25px;
+	background: none;
+	width: 100%;
+}
+
+td.match_team_home, td.match_away_home {
+	width: 40%;
+}
+
+ul.home_goals, ul.away_goals {
+	width: 40%;
+	margin: 0px 5%;
+	float: left;
+	list-style-type: none;
+}
+
+ul.home_goals {
+	text-align: right;
 }
