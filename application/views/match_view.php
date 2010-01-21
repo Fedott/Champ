@@ -39,12 +39,16 @@
 				<ul class="home_goals">
 				<?if($match->home_goals):?>
 					<?foreach ($home_goals as $goal):?>
-					<li><?=$goal->player->name();?></li>
+					<li><?=$goal->player->name();?> <?=misc::get_goals_images($goal->count);?></li>
 					<?endforeach;?>
 				<?endif;?>
 				</ul>
 				<ul class="away_goals">
-					<li>А. Дзагоев</li>
+				<?if($match->away_goals):?>
+					<?foreach ($away_goals as $goal):?>
+					<li><?=misc::get_goals_images($goal->count);?> <?=$goal->player->name();?></li>
+					<?endforeach;?>
+				<?endif;?>
 				</ul>
 			</td>
 			<td>
