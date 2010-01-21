@@ -285,6 +285,10 @@ div.match_teams {
 	font-size: 25px;
 }
 
+table.match {
+	margin-top: 20px;
+}
+
 table.match_teams {
 	font-size: 25px;
 	background: none;
@@ -300,6 +304,7 @@ ul.home_goals, ul.away_goals {
 	margin: 0px 5%;
 	float: left;
 	list-style-type: none;
+	font-weight: bold;
 }
 
 ul.home_goals {

@@ -8,7 +8,7 @@
 	<tbody>
 		<tr>
 			<td class="home_team_ava">
-				<img class="team_logo" alt="<?=$match->home->team->name;?>" src="http://img.championat.net/team/logo/260_6_milan.gif"/>
+				<?=html::image($match->home->team->img, array('class' => 'team_logo', 'alt' => $match->home->team->name));?>
 			</td>
 			<td class="match_result">
 				<div class="match_date">
@@ -29,7 +29,7 @@
 				<?=$match->home_goals;?> : <?=$match->away_goals;?>
 			</td>
 			<td class="away_team_ava">
-				<img class="team_logo" alt="<?=$match->away->team->name;?>" src="http://img.championat.net/team/logo/12611718291529776973_fc_novara_calcio.jpg"/>
+				<?=html::image($match->away->team->img, array('class' => 'team_logo', 'alt' => $match->away->team->name));?>
 			</td>
 		</tr>
 		<tr>
