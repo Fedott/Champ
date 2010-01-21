@@ -1,0 +1,1 @@
+ALTER TABLE  `teams` ADD  `img` VARCHAR( 255 ) NOT NULL

@@ -60,5 +60,41 @@
 			$this->template->content->team = $team;
 			$this->template->content->i = 1;
 		}
+
+		public function edit_image($tid)
+		{
+			$team = ORM::factory('team', $tid);
+
+			if($_FILES)
+			{
+				$files = Validation::factory($_FILES)
+					->add_rules('picture', 'upload::valid', 'upload::required', 'upload::type[gif,jpg,png]', 'upload::size[1M]');
+
+				if ($files->validate())
+				{
+					// Temporary file name
+					$filename = upload::save('picture');
+
+					$img_url = 'media/logo/'.text::random('alnum', 15).strrchr($filename, '.');
+
+					// Resize, sharpen, and save the image
+					Image::factory($filename)
+						->resize(130, 130, Image::AUTO)
+						->save(DOCROOT.$img_url);
+
+					// Remove the temporary file
+					unlink($filename);
+
+					$team->img = $img_url;
+					$team->save();
+				}
+			}
+
+			$view = new View('admin/team_edit_image');
+			$view->team = $team;
+
+			$this->template->title = "Редактирование логотипа команды ".$team->name;
+			$this->template->content = $view;
+		}
 		
 	}

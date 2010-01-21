@@ -20,10 +20,10 @@
 <h3>Подтверждённые матчи</h3>
 <ul>
 <?foreach($matches as $match):?>
-	<li><?=$match->home->team->name." ".$match->home_goals." - ".$match->away_goals." ".$match->away->team->name;?> (<?=$match->table->name;?>)</li>
+	<li><?=html::anchor('match/view/'.$match->id, $match->home->team->name." ".$match->home_goals." - ".$match->away_goals." ".$match->away->team->name);?> (<?=$match->table->name;?>)</li>
 <?endforeach;?>
 <?foreach($matches_a as $match):?>
-	<li><?=$match->home->team->name." ".$match->home_goals." - ".$match->away_goals." ".$match->away->team->name;?> (<?=$match->table->name;?>)</li>
+	<li><?=html::anchor('match/view/'.$match->id, $match->home->team->name." ".$match->home_goals." - ".$match->away_goals." ".$match->away->team->name);?> (<?=$match->table->name;?>)</li>
 <?endforeach;?>
 </ul>
 <?endif;?>
