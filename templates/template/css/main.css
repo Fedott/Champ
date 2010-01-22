@@ -205,6 +205,11 @@ div.news_short_info {
 	font-size: 11px;
 }
 
+div.news_short_header, div.news_short_info {
+	height: 22px;
+	background: honeyDew;
+}
+
 div.news_short_body {
 	clear: both;
 }
