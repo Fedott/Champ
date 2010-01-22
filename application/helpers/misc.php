@@ -11,4 +11,9 @@
 
 			return $goals;
 		}
+
+		public static function get_human_date($date = NULL)
+		{
+			return date('d-m-Y H:i', $date);
+		}
 	}

@@ -315,3 +315,18 @@ ul.home_goals, ul.away_goals {
 ul.home_goals {
 	text-align: right;
 }
+
+
+/**
+ * Страница команды в турнире
+ */
+table.season_info {
+	min-width: 0px;
+	width: 30%;
+	background: #eef4fa;
+	font-size: medium;
+}
+
+table.matches {
+	margin: 10px 0px;
+}
