@@ -75,6 +75,7 @@ jQuery( function($) {
 
 		$("#away_id").bind('change', function load_players_away_team(){
 			var tid = $(this).val();
+			$('#away_team_players_goal').html('<img src="/templates/template/img/ajax_load_bar.gif"/>');
 			$.get('/match/get_away_team_players/' + tid, 0, function(data){
 				$('#away_team_players_goal').html(data);
 			});
