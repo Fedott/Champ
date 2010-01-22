@@ -116,7 +116,7 @@
 			}
 
 			$teams = ORM::factory('line')->where(array('user_id != ' => $this->user->id, 'table_id' => $tourn))->find_all();
-			$my_matches = ORM::factory('match')->where(array('home_id' => $this->user->id, 'table_id' => $tourn))->find_all();
+			$my_matches = ORM::factory('match')->where(array('home_id' => $myline->id, 'table_id' => $tourn))->find_all();
 
 			$tarr = array('NULL' => 'Выберите команду соперника');
 			foreach($teams as $team)
@@ -234,5 +234,20 @@
 			echo Kohana::debug($_POST);
 			$this->template->title = 2;
 			$this->template->content = '';
+		}
+
+		public function view($id)
+		{
+			$match = ORM::factory('match', $id);
+			$home_goals = ORM::factory('goal')->where(array('match_id' => $id, 'line_id' => $match->home_id))->find_all();
+			$away_goals = ORM::factory('goal')->where(array('match_id' => $id, 'line_id' => $match->away_id))->find_all();
+
+			$view = new View('match_view');
+			$view->match = $match;
+			$view->home_goals = $home_goals;
+			$view->away_goals = $away_goals;
+
+			$this->template->title = "Просмотр матча ".$match->home->team->name." - ".$match->away->team->name;
+			$this->template->content = $view;
 		}
 	}

@@ -60,7 +60,7 @@
 		</label>
 		<div>
 			<input class="field text medium" type="text" name="icq" id="icq" maxlength="12" value="<?=$form['icq']?>">
-			<label for="icq">Только цыфры</label>
+			<label for="icq">Только цифры</label>
 		</div>
 	</li>
 	<li class="">
