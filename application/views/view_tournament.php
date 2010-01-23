@@ -5,6 +5,7 @@
 		<tr>
 			<th>№</th>
 			<th>Команда</th>
+			<th>Матчей</th>
 			<th>Побед</th>
 			<th>Ничьих</th>
 			<th>Поражений</th>
@@ -18,6 +19,7 @@
 	<tr class="<?=(($i%2)==0)?'chet':'nechet'?><?=($line->user_id == $this->user->id)?' my_team':'';?>">
 		<td><?=$i++?></td>
 		<td><?=$line->team->name?></td>
+		<td><?=$line->games;?></td>
 		<td><?=$line->win?></td>
 		<td><?=$line->drawn?></td>
 		<td><?=$line->lose?></td>
