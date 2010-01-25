@@ -53,7 +53,6 @@
 			<td><?=misc::get_human_date($match->date);?></td>
 		</tr>
 	<?endforeach;?>
-	<?$i = 1;?>
 	<?foreach($am as $match):?>
 		<tr class="<?=((++$i%2)==0)?'chet':'nechet'?>">
 			<td><?=html::anchor('/tournament/team/'.$match->home_id, $match->home->team->name);?></td>
