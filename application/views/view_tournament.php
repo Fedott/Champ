@@ -18,7 +18,7 @@
 	<?foreach ($tournament->lines as $line):?>
 	<tr class="<?=(($i%2)==0)?'chet':'nechet'?><?=($line->user_id == $this->user->id)?' my_team':'';?>">
 		<td><?=$i++?></td>
-		<td><?=$line->team->name?></td>
+		<td><?=html::anchor('tournament/team/'.$line->id, $line->team->name);?></td>
 		<td><?=$line->games;?></td>
 		<td><?=$line->win?></td>
 		<td><?=$line->drawn?></td>
