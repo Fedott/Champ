@@ -44,7 +44,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<?$i = 1;?>
+	<?$i = 0;?>
 	<?foreach($hm as $match):?>
 		<tr class="<?=((++$i%2)==0)?'chet':'nechet'?>">
 			<td><?=html::anchor('/tournament/team/'.$match->home_id, $match->home->team->name);?></td>
