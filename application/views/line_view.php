@@ -46,7 +46,7 @@
 	<tbody>
 	<?$i = 1;?>
 	<?foreach($hm as $match):?>
-		<tr class="<?=(($i%2)==0)?'chet':'nechet'?>">
+		<tr class="<?=((++$i%2)==0)?'chet':'nechet'?>">
 			<td><?=html::anchor('/tournament/team/'.$match->home_id, $match->home->team->name);?></td>
 			<td><?=html::anchor('match/view/'.$match->id, $match->home_goals." - ".$match->away_goals);?></td>
 			<td><?=html::anchor('/tournament/team/'.$match->away_id, $match->away->team->name);?></td>
@@ -55,7 +55,7 @@
 	<?endforeach;?>
 	<?$i = 1;?>
 	<?foreach($am as $match):?>
-		<tr class="<?=(($i%2)==0)?'chet':'nechet'?>">
+		<tr class="<?=((++$i%2)==0)?'chet':'nechet'?>">
 			<td><?=html::anchor('/tournament/team/'.$match->home_id, $match->home->team->name);?></td>
 			<td><?=html::anchor('match/view/'.$match->id, $match->home_goals." - ".$match->away_goals);?></td>
 			<td><?=html::anchor('/tournament/team/'.$match->away_id, $match->away->team->name);?></td>
