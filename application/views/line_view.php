@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');?>
 <h1><?=$line->team->name;?></h1>
 <p>Турнир: <?=html::anchor('/tournament/view/'.$line->table_id, $line->table->name);?></p>
-<p>Тренер: <?=$line->user->first_name." ".$line->user->last_name." (".$line->user->username.")";?></p>
+<p>Тренер: <?=$line->user->first_name." ".$line->user->last_name." (".$line->user->username.")";?> ICQ: <?=$line->user->icq;?></p>
 <table class="season_info">
 	<tbody>
 		<tr>
