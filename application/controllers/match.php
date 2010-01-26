@@ -273,11 +273,13 @@
 					->where(array('table_id' => $tournament->id))
 					->orderby(array('date' => 'DESC'))
 					->limit($this->pagination->items_per_page, $this->pagination->sql_offset)
+					->with('table')
 					->find_all();
 			else
 				$matches = ORM::factory('match')
 					->orderby(array('date' => 'DESC'))
 					->limit($this->pagination->items_per_page, $this->pagination->sql_offset)
+					->with('table')
 					->find_all();
 
 			$view = new View('matches_listen');
