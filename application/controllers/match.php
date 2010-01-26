@@ -250,4 +250,41 @@
 			$this->template->title = "Просмотр матча ".$match->home->team->name." - ".$match->away->team->name;
 			$this->template->content = $view;
 		}
+
+		public function listen($tournid = NULL)
+		{
+			$tournament = ORM::factory('table', $tournid);
+
+			if($tournid)
+				$all = ORM::factory('match')
+					->where(array('table_id' => $tournament->id))
+					->count_all();
+			else
+				$all = ORM::factory('match')
+					->count_all();
+
+			$this->pagination = new Pagination(array(
+				'total_items'	=> $all, // Total number of items.
+				'query_string'	=> 'page',
+			));
+
+			if($tournid)
+				$matches = ORM::factory('match')
+					->where(array('table_id' => $tournament->id))
+					->orderby(array('date' => 'DESC'))
+					->limit($this->pagination->items_per_page, $this->pagination->sql_offset)
+					->find_all();
+			else
+				$matches = ORM::factory('match')
+					->orderby(array('date' => 'DESC'))
+					->limit($this->pagination->items_per_page, $this->pagination->sql_offset)
+					->find_all();
+
+			$view = new View('matches_listen');
+			$view->matches = $matches;
+			$view->tourn = $tournament;
+
+			$this->template->title = "Прошедшие матчи";
+			$this->template->content = $view;
+		}
 	}

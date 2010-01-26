@@ -5,7 +5,8 @@
 	</p>
 
 	<ul class="vmenu">
-		<li><?=html::anchor('match', 'Матчи');?></li>
+		<li><?=html::anchor('match', 'Мои матчи');?></li>
+		<li><?=html::anchor('match/listen', 'Все матчи');?></li>
 		<li><?=html::anchor('tournament', "Турниры");?></li>
 	</ul>
 

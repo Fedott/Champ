@@ -11,8 +11,11 @@
 				<?=html::image($match->home->team->img, array('class' => 'team_logo', 'alt' => $match->home->team->name));?>
 			</td>
 			<td class="match_result">
+				<div class="match_tournament">
+					<?=$match->table->name;?>
+				</div>
 				<div class="match_date">
-					<?=date('d-m-Y H:i', $match->date);?>
+					<?=misc::get_human_date($match->date);?>
 				</div>
 				<table class="match_teams">
 					<tr>

@@ -30,6 +30,7 @@
 	</tr>
 	<?endforeach;?>
 </table>
+<?=html::anchor('match/listen/'.$tournament->url, 'Матчи в рамках турнира');?>
 <?if($uchastie):?>
 <hr>
 <?=html::anchor('match/reg/'.$tournament->id, 'Зарегистрировать матч');?>

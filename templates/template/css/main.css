@@ -261,6 +261,11 @@ td.away_team_ava {
 	padding: 0px;
 }
 
+div.match_tournament {
+	font-size: 14px;
+	font-weight: bold;
+}
+
 div.home_team_name {
 	clear: left;
 	float: left;
