@@ -3,6 +3,7 @@
     class Match_Model extends ORM
 	{
 		protected $has_one = array('home' => 'line', 'away' => 'line', 'table');
+		protected $has_many = array('comments');
 
 		public function validate(array & $array, $save = FALSE)
 		{

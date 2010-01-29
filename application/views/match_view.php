@@ -24,11 +24,6 @@
 						<td class="match_away_home"><?=$match->away->team->name;?></td>
 					</tr>
 				</table>
-<!--				<div class="match_teams">
-					<?=$match->home->team->name;?>
-					-
-					<?=$match->away->team->name;?>
-				</div> -->
 				<?=$match->home_goals;?> : <?=$match->away_goals;?>
 			</td>
 			<td class="away_team_ava">
@@ -60,3 +55,21 @@
 		</tr>
 	</tbody>
 </table>
+<?if(count($comments)):?>
+<div class="comments">
+	<h4>Комментарии к матчу:</h4>
+	<?foreach($comments as $comment):?>
+	<div class="comment">
+		<div class="comment_author">
+			<img src="/ava.gif" width="100" height="100">
+		</div>
+		<div class="comment_header">
+			<?=$comment->author->username;?> <?=misc::get_human_date($comment->date);?>
+		</div>
+		<div class="comment_text">
+			<?=$comment->text;?>
+		</div>
+	</div>
+	<?endforeach;?>
+</div>
+<?endif;?>

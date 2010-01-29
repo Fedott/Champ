@@ -321,6 +321,26 @@ ul.home_goals {
 	text-align: right;
 }
 
+div.comment {
+	clear: left;
+	background-color: #F7FFF4;
+	min-height: 100px;
+}
+
+div.comment_author {
+	float: left;
+	margin-right: 10px;
+}
+
+div.comment_text {
+	clear: right;
+}
+
+div.comment_header {
+	font-size: 12px;
+	background: honeyDew;
+}
+
 
 /**
  * Страница команды в турнире

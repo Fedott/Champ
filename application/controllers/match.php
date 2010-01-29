@@ -43,6 +43,7 @@
 				'home_goals'	=> '',
 				'away_goals'	=> '',
 			);
+			$comment_text = '';
 
 			$errors = array();
 
@@ -79,6 +80,14 @@
 					$match->date = time();
 					$match->table_id = $tourn;
 					$match->save();
+
+					$comment = ORM::factory('comment');
+					$comment->text = text::auto_link(text::auto_p($_POST['comment']));
+					$comment->match_id = $match->id;
+					$comment->author_id = $this->user->id;
+					$comment->date = date();
+					$comment->save();
+					
 					foreach ($_POST['goals_h'] as $gg)
 					{
 						if(!empty ($gg[1]))
@@ -112,6 +121,7 @@
 				else
 				{
 					$form = $match->as_array();
+					$comment_text = $_POST['comment'];
 				}
 			}
 
@@ -145,6 +155,7 @@
 			$this->template->content->teams = $tarr;
 			$this->template->content->uteam = $uteam;
 			$this->template->content->my_team_players = $plarr;
+			$this->template->content->comment_text = $comment_text;
 		}
 
 		public function confirm($mid)
@@ -241,11 +252,13 @@
 			$match = ORM::factory('match', $id);
 			$home_goals = ORM::factory('goal')->where(array('match_id' => $id, 'line_id' => $match->home_id))->find_all();
 			$away_goals = ORM::factory('goal')->where(array('match_id' => $id, 'line_id' => $match->away_id))->find_all();
+			$comments = ORM::factory('comment')->where(array('match_id' => $match->id))->with('author')->find_all();
 
 			$view = new View('match_view');
 			$view->match = $match;
 			$view->home_goals = $home_goals;
 			$view->away_goals = $away_goals;
+			$view->comments = $comments;
 
 			$this->template->title = "Просмотр матча ".$match->home->team->name." - ".$match->away->team->name;
 			$this->template->content = $view;

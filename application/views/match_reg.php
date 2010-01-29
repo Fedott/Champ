@@ -79,6 +79,14 @@
 		</div>
 	</li>
 	<li>
+		<label class="desc" for="away_id">
+			Комментарий к матчу
+		</label>
+		<div>
+			<?=form::textarea(array('id' => 'comment', 'name' => 'comment', 'class' => 'textarea medium field'), $comment_text);?>
+		</div>
+	</li>
+	<li>
 		<input type="hidden" name="home_id" value="<?=$uteam->id;?>">
 		<input type="submit" class="submit" value="Сохранить изменения">
 	</li>
