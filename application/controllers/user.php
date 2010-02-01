@@ -86,4 +86,59 @@
 			Auth::instance()->logout();
 			url::redirect('/user/login');
 		}
+
+		public function profile()
+		{
+			$auth = Auth::instance();
+			if(!$auth->logged_in())
+				exit;
+
+			$user = $auth->get_user();
+
+			$view = new View('user/profile');
+			$view->user = $user;
+
+			$this->template->title = "Ваш профиль";
+			$this->template->content = $view;
+		}
+
+		public function avatar()
+		{
+			$auth = Auth::instance();
+			if(!$auth->logged_in())
+				exit;
+
+			$user = $auth->get_user();
+
+			if($_FILES)
+			{
+				$files = Validation::factory($_FILES)
+					->add_rules('picture', 'upload::valid', 'upload::required', 'upload::type[gif,jpg,png]', 'upload::size[1M]');
+
+				if ($files->validate())
+				{
+					// Temporary file name
+					$filename = upload::save('picture');
+
+					$img_url = 'media/avatars/'.text::random('alnum', 15).strrchr($filename, '.');
+
+					// Resize, sharpen, and save the image
+					Image::factory($filename)
+						->resize(100, 100, Image::AUTO)
+						->save(DOCROOT.$img_url);
+
+					// Remove the temporary file
+					unlink($filename);
+
+					$user->avatar = $img_url;
+					$user->save();
+				}
+			}
+
+			$view = new View('user/edit_avatar');
+			$view->user = $user;
+
+			$this->template->title = "Редактирование аватара ";
+			$this->template->content = $view;
+		}
 	}

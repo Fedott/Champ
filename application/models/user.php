@@ -14,5 +14,17 @@ class User_Model extends Auth_User_Model {
 //
 //		return parent::validate($array, $save);
 //	}
+
+	public function get_avatar()
+	{
+		if(!empty($this->avatar))
+		{
+			return $this->avatar;
+		}
+		else
+		{
+			return 'media/avatars/noava.jpg';
+		}
+	}
 	
 } // End User Model

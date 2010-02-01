@@ -1,7 +1,13 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');?>
+<ul class="vmenu">
+	<li><?=html::anchor('forum', 'Форум');?></li>
+</ul>
 <?if($user != NULL):?>
 	<p>
 		<?=$user->username?> <?=html::anchor('logout', 'Выйти', array('class' => 'logout'));?>
+	</p>
+	<p>
+		<?=html::anchor('user/profile', 'Профиль');?>
 	</p>
 
 	<ul class="vmenu">
