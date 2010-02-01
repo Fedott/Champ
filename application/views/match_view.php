@@ -34,20 +34,29 @@
 			<td>
 			</td>
 			<td>
-				<ul class="home_goals">
-				<?if($match->home_goals):?>
-					<?foreach ($home_goals as $goal):?>
-					<li><?=$goal->player->name();?> <?=misc::get_goals_images($goal->count);?></li>
-					<?endforeach;?>
-				<?endif;?>
-				</ul>
-				<ul class="away_goals">
-				<?if($match->away_goals):?>
-					<?foreach ($away_goals as $goal):?>
-					<li><?=misc::get_goals_images($goal->count);?> <?=$goal->player->name();?></li>
-					<?endforeach;?>
-				<?endif;?>
-				</ul>
+				<table class="match_goals">
+					<tr>
+						<td class="left">
+							<ul class="home_goals">
+							<?if($match->home_goals):?>
+								<?foreach ($home_goals as $goal):?>
+								<li><?=$goal->player->name();?> <?=misc::get_goals_images($goal->count);?></li>
+								<?endforeach;?>
+							<?endif;?>
+							</ul>
+						</td>
+						<td class="center"> </td>
+						<td class="right">
+							<ul class="away_goals">
+							<?if($match->away_goals):?>
+								<?foreach ($away_goals as $goal):?>
+								<li><?=misc::get_goals_images($goal->count);?> <?=$goal->player->name();?></li>
+								<?endforeach;?>
+							<?endif;?>
+							</ul>
+						</td>
+					</tr>
+				</table>
 			</td>
 			<td>
 

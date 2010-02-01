@@ -250,8 +250,8 @@
 		public function view($id)
 		{
 			$match = ORM::factory('match', $id);
-			$home_goals = ORM::factory('goal')->where(array('match_id' => $id, 'line_id' => $match->home_id))->find_all();
-			$away_goals = ORM::factory('goal')->where(array('match_id' => $id, 'line_id' => $match->away_id))->find_all();
+			$home_goals = ORM::factory('goal')->with('player')->where(array('goals.match_id' => $id, 'goals.line_id' => $match->home_id))->find_all();
+			$away_goals = ORM::factory('goal')->with('player')->where(array('goals.match_id' => $id, 'goals.line_id' => $match->away_id))->find_all();
 			$comments = ORM::factory('comment')->where(array('match_id' => $match->id))->with('author')->find_all();
 
 			$view = new View('match_view');
