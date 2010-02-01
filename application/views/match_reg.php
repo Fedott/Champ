@@ -79,7 +79,7 @@
 		</div>
 	</li>
 	<li>
-		<label class="desc" for="away_id">
+		<label class="desc" for="comment">
 			Комментарий к матчу
 		</label>
 		<div>

@@ -81,12 +81,15 @@
 					$match->table_id = $tourn;
 					$match->save();
 
-					$comment = ORM::factory('comment');
-					$comment->text = text::auto_link(text::auto_p($_POST['comment']));
-					$comment->match_id = $match->id;
-					$comment->author_id = $this->user->id;
-					$comment->date = date();
-					$comment->save();
+					if(!empty($_POST['comment']))
+					{
+						$comment = ORM::factory('comment');
+						$comment->text = text::auto_link(text::auto_p($_POST['comment']));
+						$comment->match_id = $match->id;
+						$comment->author_id = $this->user->id;
+						$comment->date = time();
+						$comment->save();
+					}
 					
 					foreach ($_POST['goals_h'] as $gg)
 					{
@@ -163,9 +166,62 @@
 			$match = ORM::factory('match', $mid);
 			if($match->loaded AND $match->away->user_id == $this->user->id AND $match->confirm == 0)
 			{
+				if($_POST)
+				{
+					// Если есть комментарий, то сохраняем его
+					if(!empty($_POST['comment']))
+					{
+						$comment = ORM::factory('comment');
+						$comment->text = text::auto_link(text::auto_p($_POST['comment']));
+						$comment->match_id = $match->id;
+						$comment->author_id = $this->user->id;
+						$comment->date = time();
+						$comment->save();
+					}
+
+					// Сохранение результата матча и внесение его в таблицу
+					$home = ORM::factory('line', $match->home_id);
+					$away = ORM::factory('line', $match->away_id);
+					$home->goals += $match->home_goals;
+					$away->goals += $match->away_goals;
+					$home->passed_goals += $match->away_goals;
+					$away->passed_goals += $match->home_goals;
+					if($match->home_goals == $match->away_goals)
+					{
+						$home->points += 1;
+						$away->points += 1;
+						$home->drawn++;
+						$away->drawn++;
+					}
+					elseif ($match->home_goals > $match->away_goals)
+					{
+						$home->points += 3;
+						$home->win++;
+						$away->lose++;
+					}
+					elseif ($match->home_goals < $match->away_goals)
+					{
+						$away->points += 3;
+						$home->lose++;
+						$away->win++;
+					}
+					$home->games++;
+					$away->games++;
+					$home->save();
+					$away->save();
+					$match->confirm = 1;
+					$match->save();
+					url::redirect('match');
+				}
+
+				$home_goals = ORM::factory('goal')->with('player')->where(array('goals.match_id' => $match->id, 'goals.line_id' => $match->home_id))->find_all();
+				$away_goals = ORM::factory('goal')->with('player')->where(array('goals.match_id' => $match->id, 'goals.line_id' => $match->away_id))->find_all();
+
 				$title = "Подтверждение матча";
 				$content = new View('match_confirm');
 				$content->match = $match;
+				$content->away_goals = $away_goals;
+				$content->home_goals = $home_goals;
 
 				$this->template->title = $title;
 				$this->template->content = $content;
