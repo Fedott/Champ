@@ -34,6 +34,33 @@
 		</tr>
 	</tbody>
 </table>
+
+<?if(count($goleodors)):?>
+<h4>Бамбардиры команды</h4>
+<table cellpadding="3" cellspacing="1">
+	<thead>
+		<tr>
+			<th>№</th>
+			<th>Имя</th>
+			<th>Забито</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?$i = 1;?>
+		<?foreach ($goleodors as $lin):?>
+		<tr class="<?=(($i%2)==0)?'chet':'nechet'?>">
+			<td><?=$i++;?></td>
+			<td><?=$lin['player']->name(NULL);?></td>
+			<td><?=$lin['goals'];?></td>
+		</tr>
+		<?endforeach;?>
+	</tbody>
+</table>
+<?else:?>
+<p>Ещё не забито ни одного гола</p>
+<?endif;?>
+
+<h4>Матчи команды</h4>
 <table class="matches" cellpadding="3" cellspacing="1">
 	<thead>
 		<tr>

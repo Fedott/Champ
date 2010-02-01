@@ -283,16 +283,20 @@
 
 			if($tournid)
 				$matches = ORM::factory('match')
-					->where(array('table_id' => $tournament->id))
+					->where(array('matches.table_id' => $tournament->id))
 					->orderby(array('date' => 'DESC'))
 					->limit($this->pagination->items_per_page, $this->pagination->sql_offset)
 					->with('table')
+					->with('home')
+					->with('away')
 					->find_all();
 			else
 				$matches = ORM::factory('match')
-					->orderby(array('date' => 'DESC'))
+					->orderby(array('matches.date' => 'DESC'))
 					->limit($this->pagination->items_per_page, $this->pagination->sql_offset)
 					->with('table')
+					->with('home')
+					->with('away')
 					->find_all();
 
 			$view = new View('matches_listen');
