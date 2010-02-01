@@ -25,6 +25,7 @@
 				->groupby('player_id')
 				->limit(10)
 				->orderby('goals', 'DESC')
+				->where('table_id', $tournament->id)
 				->get();
 
 			$goleodors = array();
