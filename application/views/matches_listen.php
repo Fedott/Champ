@@ -19,7 +19,7 @@
 	<tbody>
 	<?$i = 0;?>
 	<?foreach($matches as $match):?>
-		<tr class="<?=((++$i%2)==0)?'chet':'nechet'?><?=($match->away->user_id == $this->user->id)?' my_team':'';?>">
+		<tr class="<?=((++$i%2)==0)?'chet':'nechet'?><?=($match->away->user_id == $this->user->id || $match->home->user_id == $this->user->id)?' my_team':'';?>">
 			<td><?=html::anchor('tournament/team/'.$match->home_id, $match->home->team->name);?></td>
 			<td><?=html::anchor('match/view/'.$match->id, $match->home_goals." - ".$match->away_goals);?></td>
 			<td><?=html::anchor('tournament/team/'.$match->away_id, $match->away->team->name);?></td>
