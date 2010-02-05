@@ -104,12 +104,14 @@
 	<tbody>
 		<?$ii = 0;?>
 		<?foreach($all_table_lines as $ll):?>
-		<tr class="<?=((++$ii%2)==0)?'chet':'nechet'?>">
-			<td><?=html::anchor('tournament/team/'.$ll->id, $ll->team->name);?></td>
-			<?for($i = 1; $i <= $krugov; $i++):?>
-			<td><?if($play_or_not_play[$ll->id] >= $i):?><p class="play">Сыгран</p><?else:?><p class="not_play">Не сыгран</p><?endif;?></td>
-			<?endfor;?>
-		</tr>
+			<?if($ll->id != $line->id):?>
+			<tr class="<?=((++$ii%2)==0)?'chet':'nechet'?>">
+				<td><?=html::anchor('tournament/team/'.$ll->id, $ll->team->name);?></td>
+				<?for($i = 1; $i <= $krugov; $i++):?>
+				<td><?if($play_or_not_play[$ll->id] >= $i):?><p class="play">Сыгран</p><?else:?><p class="not_play">Не сыгран</p><?endif;?></td>
+				<?endfor;?>
+			</tr>
+			<?endif;?>
 		<?endforeach;?>
 	</tbody>
 </table>
