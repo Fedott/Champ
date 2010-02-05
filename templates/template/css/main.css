@@ -352,6 +352,7 @@ div.comment_author {
 
 div.comment_text {
 	clear: right;
+	font-size: 14px;
 }
 
 div.comment_header {

@@ -73,7 +73,7 @@
 			<?=html::image(array('src' => $comment->author->get_avatar()/*, 'width' => 100, 'height' => 100*/), $comment->author->username);?>
 		</div>
 		<div class="comment_header">
-			<?=$comment->author->username;?> <?=misc::get_human_date($comment->date);?>
+			<b><?=$comment->author->username;?></b> <?=misc::get_human_date($comment->date);?>
 		</div>
 		<div class="comment_text">
 			<?=$comment->text;?>
