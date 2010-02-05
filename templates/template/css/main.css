@@ -343,6 +343,7 @@ div.comment {
 	clear: left;
 	background-color: #F7FFF4;
 	min-height: 100px;
+	margin-bottom: 10px;
 }
 
 div.comment_author {
