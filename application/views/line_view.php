@@ -90,3 +90,26 @@
 	<?endforeach;?>
 	</tbody>
 </table>
+
+<h4>Сыгранные/не сыгранные матчи</h4>
+<table class="matches" cellpadding="3" cellspacing="1">
+	<thead>
+		<tr>
+			<th>Команда</th>
+			<?for($i = 1; $i <= $krugov; $i++):?>
+			<th>Круг <?=$i;?></th>
+			<?endfor;?>
+		</tr>
+	</thead>
+	<tbody>
+		<?$ii = 0;?>
+		<?foreach($all_table_lines as $ll):?>
+		<tr class="<?=((++$ii%2)==0)?'chet':'nechet'?>">
+			<td><?=html::anchor('tournament/team/'.$ll->id, $ll->team->name);?></td>
+			<?for($i = 1; $i <= $krugov; $i++):?>
+			<td><?if($play_or_not_play[$ll->id] >= $i):?><p class="play">Сыгран</p><?else:?><p class="not_play">Не сыгран</p><?endif;?></td>
+			<?endfor;?>
+		</tr>
+		<?endforeach;?>
+	</tbody>
+</table>

@@ -87,11 +87,46 @@
 				$goleodors[$player->id]['player'] = $player;
 			}
 
+			// Для обеспечения в будущем количества кругов;
+			$krugov = 2;
+			$arr_play_or_not_play = array();
+
+			$all_table_lines = ORM::factory('line')->with('team')->where(array('table_id' => $line->table_id))->find_all();
+			foreach($all_table_lines as $ll)
+				$arr_play_or_not_play[$ll->id] = 0;
+
+			foreach ($home_matches as $match)
+			{
+				if($match->home_id == $line->id)
+				{
+					$arr_play_or_not_play[$match->away_id]+= 1;
+				}
+				if($match->away_id == $line->id)
+				{
+					$arr_play_or_not_play[$match->home_id]+= 1;
+				}
+			}
+
+			foreach ($away_matches as $match)
+			{
+				if($match->home_id == $line->id)
+				{
+					$arr_play_or_not_play[$match->away_id]+= 1;
+				}
+				if($match->away_id == $line->id)
+				{
+					$arr_play_or_not_play[$match->home_id]+= 1;
+				}
+			}
+
 			$view = new View('line_view');
 			$view->hm = $home_matches;
 			$view->am = $away_matches;
 			$view->line = $line;
 			$view->goleodors = $goleodors;
+			$view->play_or_not_play = $arr_play_or_not_play;
+			$view->krugov = $krugov;
+			$view->all_table_lines = $all_table_lines;
 
 			$this->template->title = "Команда ".$line->team->name.", в турнире ".$line->table->name;
 			$this->template->content = $view;

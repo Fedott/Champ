@@ -375,3 +375,11 @@ table.season_info {
 table.matches {
 	margin: 10px 0px;
 }
+
+p.play {
+	color: green;
+}
+
+p.not_play {
+	color: red;
+}
