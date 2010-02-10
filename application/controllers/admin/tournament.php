@@ -99,4 +99,75 @@
 			$line = ORM::factory('line')->where(array('team_id' => 2, 'table_id' => 2))->find();
 			echo Kohana::debug($line);
 		}
+
+		public function edit_trophy($id = NULL)
+		{
+			$trophy = ORM::factory('trophy', $id);
+
+			$form = array(
+				'description'	=> $trophy->description,
+				'table_id'		=> $trophy->table_id,
+				'weight'		=> $trophy->weight,
+			);
+			$errors = array();
+
+			if($_POST)
+			{
+				$data = arr::overwrite($form, $_POST);
+
+				$trophy->validate($data);
+				$errors = $data->errors('edit_trophy');
+
+				if($_FILES)
+				{
+					$files = Validation::factory($_FILES)
+						->add_rules('picture', 'upload::valid', 'upload::required', 'upload::type[gif,jpg,png]', 'upload::size[1M]');
+
+					if ($files->validate())
+					{
+						// Temporary file name
+						$filename = upload::save('picture');
+
+						$img_url = 'media/trophies/'.text::random('alnum', 15).strrchr($filename, '.');
+
+						// Resize, sharpen, and save the image
+						Image::factory($filename)
+							->resize(300, 300, Image::AUTO) // TODO: Нужно подумать на счёт размера картинки трофея. Возможно стоит добавить миниатюру его и основное большое изображение
+							->save(DOCROOT.$img_url);
+
+						// Remove the temporary file
+						unlink($filename);
+
+						$trophy->image = $img_url;
+						$trophy->save();
+					}
+				}
+
+				if(empty ($errors))
+				{
+					$trophy->save();
+					url::redirect('admin/tornament/view/'.$trophy->table_id);
+				}
+				else
+				{
+					$form = $data->as_array();
+				}
+			}
+
+			$tables = ORM::factory('table')->find_all();
+			$tarr = array();
+			foreach($tables as $table)
+			{
+				$tarr[$table->id] = $table->name;
+			}
+
+			$view = new View('admin/trophy_edit');
+			$view->trophy	= $trophy;
+			$view->tables	= $tarr;
+			$view->form		= $form;
+			$view->errors	= $errors;
+
+			$this->template->title = "Редактирование трофея";
+			$this->template->content = $view;
+		}
 	}

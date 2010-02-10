@@ -38,6 +38,9 @@
 			</div>
 			<div id="sidebar" class="sl">
 				<?=Widget::factory('menu', FALSE)->render()?>
+				<?if($this->auth->logged_in('admin')):?>
+					<?=Widget::factory('admin_menu', FALSE)->render()?>
+				<?endif;?>
 			</div>
 		</div>
 		<div id="footer">
