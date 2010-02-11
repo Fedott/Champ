@@ -2,6 +2,7 @@
 
 	class News_Model extends ORM
 	{
+		protected $has_one = array('author' => 'user');
 
 		protected $sorting = array('created' => 'desc');
 
@@ -18,10 +19,9 @@
 		public function validate(array & $array, $save = FALSE)
 		{
 			$array = Validation::factory($array)
-				->add_filter('trim')
+				->pre_filter('trim')
 				->add_rules('title', 'required', 'length[1,255]')
 				->add_rules('text', 'required')
-				->add_rules('url', 'required', array($this, '_url_exists'))
 				;
 
 			return parent::validate($array, $save);

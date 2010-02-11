@@ -9,6 +9,15 @@ form {
 	text-align: left;
 }
 
+form input[type=submit] {
+	border: solid 1px;
+	background: #FFFFFF url(/templates/template/img/fieldbg.gif) repeat-x scroll center top;
+	color: #333333;
+	font-family: "Lucida Grande",Tahoma,Arial,sans-serif;
+	font-size: 100%;
+	padding: 2px 0;
+}
+
 form ul {
 	list-style-type:none;
 	margin:0;
@@ -88,6 +97,14 @@ select.select {
 
 textarea.textarea {
 	height: 100px;
+}
+
+textarea.max {
+	width: 100%;
+}
+
+textarea#wysiwyg {
+	height: 200px;
 }
 
 form li div label, form li span label {

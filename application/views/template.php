@@ -7,6 +7,7 @@
 			'templates/template/css/reset',
 			'templates/template/css/main',
 			'templates/template/css/form',
+			'templates/template/js/jwysiwyg/jquery.wysiwyg.css',
 		));?>
 	<?=html::script(array(
 			'templates/template/js/jquery',

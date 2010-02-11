@@ -4,5 +4,6 @@
 	<li><?=html::anchor('admin/team', 'Управление командами');?></li>
 	<li><?=html::anchor('admin/player', "Управление игроками");?></li>
 	<li><?=html::anchor('admin/tournament', "Управление турнирами");?></li>
+	<li><?=html::anchor('admin/news/edit', "Добавить новость");?></li>
 </ul>
 
