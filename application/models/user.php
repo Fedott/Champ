@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 class User_Model extends Auth_User_Model {
+	protected $has_many = array('lines');
 	
 //	public function validate(array & $array, $save = FALSE)
 //	{

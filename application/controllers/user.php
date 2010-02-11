@@ -141,4 +141,18 @@
 			$this->template->title = "Редактирование аватара ";
 			$this->template->content = $view;
 		}
+
+		public function view($id)
+		{
+			$user = ORM::factory('user', $id);
+
+			$lines = ORM::factory('line')->with('team')->with('table')->where('lines.user_id', $user->id)->find_all();
+
+			$view = new View('user/user_view');
+			$view->user = $user;
+			$view->lines = $lines;
+
+			$this->template->title = "Пользователь, ".$user->username;
+			$this->template->content = $view;
+		}
 	}
