@@ -35,6 +35,10 @@ abstract class Template_Controller extends Controller {
 			$this->auth->auto_login();
 		}
 		$this->user = $this->auth->get_user();
+		if(!$this->auth->logged_in())
+		{
+			$this->user->id = -1;
+		}
 
 		// Load the template
 		$this->template = new View($this->template);
