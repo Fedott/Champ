@@ -22,7 +22,7 @@
 					if(!$news->created)
 						$news->created = time();
 
-					$news->author	= $this->user->id;
+					$news->author_id	= $this->user->id;
 					$news->url		= misc::getTranslit($news->title);
 
 					$news->save();
