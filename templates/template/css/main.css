@@ -203,6 +203,7 @@ div.news_short_header a {
 
 div.news_short_header{
 	float: left;
+	padding-left: 5px;
 }
 
 div.news_short {
@@ -222,6 +223,7 @@ div.news_short_header, div.news_short_info {
 
 div.news_short_body {
 	clear: both;
+	padding: 1px 5px;
 }
 
 /**
