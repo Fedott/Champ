@@ -26,3 +26,20 @@ CREATE TABLE IF NOT EXISTS `trophies` (
   `weight` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
+
+
+-- 18.02.2010
+-- Структура таблицы `transfers`
+--
+
+CREATE TABLE IF NOT EXISTS `transfers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `old_team_id` int(11) DEFAULT NULL,
+  `new_team_id` int(11) DEFAULT NULL,
+  `player_id` int(11) DEFAULT NULL,
+  `buyer_id` int(11) DEFAULT NULL,
+  `seller_id` int(11) DEFAULT NULL,
+  `sum` float DEFAULT NULL,
+  `moder_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
