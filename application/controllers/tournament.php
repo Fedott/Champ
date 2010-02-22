@@ -29,6 +29,7 @@
 				->get();
 
 			$goleodors = array();
+			$players_like = array();
 			foreach ($res as $row)
 			{
 				$players_like[] = $row->player_id;
@@ -36,11 +37,14 @@
 //				$goleodors[] = array('player' => ORM::factory('player')->with('team')->find($row->player_id), 'goals' => $row->goals, 'line_id' => $row->line_id);
 			}
 
-			$players_goals = ORM::factory('player')->with('team')->in('players.id', implode(',', $players_like))->find_all();
-
-			foreach($players_goals as $player)
+			if(!empty($players_like))
 			{
-				$goleodors[$player->id]['player'] = $player;
+				$players_goals = ORM::factory('player')->with('team')->in('players.id', implode(',', $players_like))->find_all();
+
+				foreach($players_goals as $player)
+				{
+					$goleodors[$player->id]['player'] = $player;
+				}
 			}
 
 
