@@ -67,7 +67,6 @@
 // TODO: Сделать нормально добавление/удаление команд. При добавлении не выводить уже добавленные команды, а то некрасиво.
 			$tournament = ORM::factory('table', $tid);
 //			$teams = ORM::factory('team')->find_all();
-			$teams = ORM::factory('team')->orderby('name')->find_all();
 
 			if($_POST)
 			{
@@ -85,6 +84,21 @@
 				$tournament->save();
 				url::redirect('admin/tournament/view/'.$tournament->id);
 			}
+
+			$notlike_teams = array();
+			$added_teams = ORM::factory('line')->where(array('table_id' => $tournament->id))->find_all();
+			if(!empty ($added_teams))
+			{
+				foreach ($added_teams as $at)
+				{
+					$notlike_teams[] = $at->team_id;
+				}
+			}
+
+			if(!empty ($notlike_teams))
+				$teams = ORM::factory('team')->notin('id', $notlike_teams)->orderby('name')->find_all();
+			else
+				$teams = ORM::factory('team')->orderby('name')->find_all();
 
 //			echo Kohana::debug($teams);
 
@@ -146,7 +160,7 @@
 				if(empty ($errors))
 				{
 					$trophy->save();
-					url::redirect('admin/tornament/view/'.$trophy->table_id);
+					url::redirect('admin/tournament/view/'.$trophy->table_id);
 				}
 				else
 				{
@@ -168,6 +182,78 @@
 			$view->errors	= $errors;
 
 			$this->template->title = "Редактирование трофея";
+			$this->template->content = $view;
+		}
+
+		public function line_view($lid)
+		{
+			$line = ORM::factory('line', $lid);
+
+			$view = new View('admin/line_view');
+			$view->line = $line;
+
+			$this->template->title = "Команда, ".$line->team->name.", в турнире ".$line->table->name;
+			$this->template->content = $view;
+		}
+
+		public function line_coach($lid)
+		{
+			$line = ORM::factory('line', $lid);
+
+			if($_POST)
+			{
+				$user_id = $_POST['user_id'];
+
+				$line->user_id = $user_id;
+				$line->save();
+				url::redirect('admin/tournament/view/'.$line->table_id);
+			}
+
+			$lines_user = ORM::factory('line')->where(array('table_id' => $line->table_id))->find_all();
+			$notin = array('0');
+			foreach ($lines_user as $user)
+			{
+				$notin[] = $user->user_id;
+			}
+
+			$users = ORM::factory('user')->notin('id', $notin)->find_all();
+			$users_arr = array('0' => 'Выберите пользователя');
+			foreach ($users as $user)
+			{
+				$users_arr[$user->id] = $user->username;
+			}
+
+			$view = new View('admin/line_coach');
+			$view->line = $line;
+			$view->users = $users_arr;
+
+			$this->template->title = 'Назначить тренера команде '.$line->team->name.', в турнире '.$line->table->name;
+			$this->template->content = $view;
+		}
+
+		public function line_trophy($lid)
+		{
+			$line = ORM::factory('line', $lid);
+
+			if($_POST && $_POST['trophy_id'] != NULL)
+			{
+				$trophy = ORM::factory('trophy', $_POST['trophy_id']);
+				$trophy->reward($line);
+				url::redirect('tournament/team/'.$line->id);
+			}
+
+			$trophies = ORM::factory('trophy')->where(array('user_id' => 0, 'table_id' => $line->table_id))->find_all();
+			$tr_arr = array('NULL' => 'Выберите трофей');
+			foreach ($trophies as $tt)
+			{
+				$tr_arr[$tt->id] = $tt->description;
+			}
+
+			$view = new View('admin/line_trophy');
+			$view->line = $line;
+			$view->trophies = $tr_arr;
+
+			$this->template->title = "Назначение трофея команде ".$line->team->name.', в турнире '.$line->table->name;
 			$this->template->content = $view;
 		}
 	}

@@ -13,4 +13,18 @@
 
 			return parent::validate($array, $save);
 		}
+
+		public function reward($line)
+		{
+			if($this->loaded)
+			{
+				$this->line_id = $line->id;
+				$this->user_id = $line->user_id;
+				$this->team_id = $line->team_id;
+
+				return $this->save();
+			}
+
+			return FALSE;
+		}
 	}

@@ -33,3 +33,5 @@
 <?=html::anchor('admin/team/edit/'.$team->id, 'Редактировать')?>
 <br>
 <?=html::anchor('admin/player/adds/'.$team->id, 'Добавить игроков')?>
+<br>
+<?=html::anchor('admin/team/edit_image/'.$team->id, 'Изменить логотип');?>
