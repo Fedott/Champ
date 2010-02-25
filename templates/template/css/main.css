@@ -105,6 +105,12 @@ body {
 
 /* Всякие другие элементы
 -----------------------------------------------------------------------------*/
+div.apply_message {
+	border: 1px green;
+	font-size: 18px;
+	text-align: center;
+}
+
 ol {
 	list-style-position: inside;
 }

@@ -12,7 +12,7 @@
 <h3>Не подтверждённые соперником матчи</h3>
 <ul>
 <?foreach($uncymatches as $match):?>
-	<li><?=$match->home->team->name." ".$match->home_goals." - ".$match->away_goals." ".$match->away->team->name;?> (<?=$match->table->name;?>)</li>
+	<li><?=$match->home->team->name." ".$match->home_goals." - ".$match->away_goals." ".$match->away->team->name;?> (<?=$match->table->name;?>) | <?=html::anchor('match/delete/'.$match->id, 'Удалить');?></li>
 <?endforeach;?>
 </ul>
 <?endif;?>

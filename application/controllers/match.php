@@ -2,6 +2,7 @@
 
 	class Match_Controller extends Template_Controller
 	{
+		protected $load_with = array('home', 'away', 'table');
 
 		public function __construct()
 		{
@@ -274,6 +275,39 @@
 			{
 				$this->template->title = "Не мухлюй!";
 				$this->template->content = "<h1 style='color: red'>Не мухлюй!</h1>";
+			}
+		}
+
+		public function delete($id)
+		{
+			$match = ORM::factory('match', $id);
+			if($match->loaded AND $match->home->user_id == $this->user->id AND $match->confirm == 0)
+			{
+				$home_goals = ORM::factory('goal')->with('player')->where(array('goals.match_id' => $match->id, 'goals.line_id' => $match->home_id))->find_all();
+				$away_goals = ORM::factory('goal')->with('player')->where(array('goals.match_id' => $match->id, 'goals.line_id' => $match->away_id))->find_all();
+
+				$view = new View('match_delete');
+				$view->match = $match;
+				$view->away_goals = $away_goals;
+				$view->home_goals = $home_goals;
+			}
+			else
+			{
+				$view = "Вы не можете удалить этот матч. Возможно он не ваш, или он уже подтверждён.";
+			}
+
+			$this->template->title = "Удаление матча";
+			$this->template->content = $view;
+		}
+
+		public function delete_confirm($id)
+		{
+			$match = ORM::factory('match', $id);
+			if($match->loaded AND $match->home->user_id == $this->user->id AND $match->confirm == 0)
+			{
+				$match->delete();
+				$this->session->set_flash('apply_message', 'Матч удалён');
+				url::redirect('match');
 			}
 		}
 

@@ -34,6 +34,11 @@
 		<div id="middle">
 			<div id="container">
 				<div id="content">
+					<?if($this->session->get('apply_message')):?>
+					<div class="apply_message">
+						<?=$this->session->get('apply_message');?>
+					</div>
+					<?endif;?>
 					<?=$content?>
 				</div>
 			</div>
