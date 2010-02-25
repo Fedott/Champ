@@ -4,7 +4,7 @@
 	{
 		public function index()
 		{
-			$tournaments = ORM::factory('table')->find_all();
+			$tournaments = ORM::factory('table')->where(array('visible' => 1))->find_all();
 
 			$this->template->title = "Турниры";
 			$this->template->content = new View('tournament');

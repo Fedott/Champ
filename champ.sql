@@ -1,23 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 3.2.3
--- http://www.phpmyadmin.net
---
--- Хост: localhost
--- Время создания: Фев 09 2010 г., 11:06
--- Версия сервера: 5.1.37
--- Версия PHP: 5.2.10-2ubuntu6.4
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
---
--- База данных: `fairplay`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `comments`
---
 
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,12 +9,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `goals`
---
-
 CREATE TABLE IF NOT EXISTS `goals` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `match_id` int(11) unsigned DEFAULT NULL,
@@ -43,12 +18,6 @@ CREATE TABLE IF NOT EXISTS `goals` (
   `count` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `lines`
---
 
 CREATE TABLE IF NOT EXISTS `lines` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -65,12 +34,6 @@ CREATE TABLE IF NOT EXISTS `lines` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `matches`
---
-
 CREATE TABLE IF NOT EXISTS `matches` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `date` int(11) unsigned DEFAULT NULL,
@@ -83,27 +46,16 @@ CREATE TABLE IF NOT EXISTS `matches` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `news`
---
-
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `text` text,
   `url` varchar(255) DEFAULT NULL,
   `created` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `players`
---
 
 CREATE TABLE IF NOT EXISTS `players` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -114,12 +66,6 @@ CREATE TABLE IF NOT EXISTS `players` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `roles`
---
-
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
@@ -128,12 +74,6 @@ CREATE TABLE IF NOT EXISTS `roles` (
   UNIQUE KEY `uniq_name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `roles_users`
---
-
 CREATE TABLE IF NOT EXISTS `roles_users` (
   `user_id` int(10) unsigned NOT NULL,
   `role_id` int(10) unsigned NOT NULL,
@@ -141,25 +81,16 @@ CREATE TABLE IF NOT EXISTS `roles_users` (
   KEY `fk_role_id` (`role_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `tables`
---
-
 CREATE TABLE IF NOT EXISTS `tables` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `year` int(4) unsigned DEFAULT NULL,
   `url` varchar(255) NOT NULL,
+  `ended` int(11) DEFAULT NULL,
+  `visible` int(11) DEFAULT NULL,
+  `active` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `teams`
---
 
 CREATE TABLE IF NOT EXISTS `teams` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -169,11 +100,29 @@ CREATE TABLE IF NOT EXISTS `teams` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `transfers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `old_team_id` int(11) DEFAULT NULL,
+  `new_team_id` int(11) DEFAULT NULL,
+  `player_id` int(11) DEFAULT NULL,
+  `buyer_id` int(11) DEFAULT NULL,
+  `seller_id` int(11) DEFAULT NULL,
+  `sum` float DEFAULT NULL,
+  `moder_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Структура таблицы `users`
---
+CREATE TABLE IF NOT EXISTS `trophies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `line_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `team_id` int(11) NOT NULL,
+  `table_id` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `weight` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -193,12 +142,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `uniq_username` (`username`),
   UNIQUE KEY `uniq_email` (`email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `user_tokens`
---
 
 CREATE TABLE IF NOT EXISTS `user_tokens` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,

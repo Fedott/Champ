@@ -256,4 +256,22 @@
 			$this->template->title = "Назначение трофея команде ".$line->team->name.', в турнире '.$line->table->name;
 			$this->template->content = $view;
 		}
+
+		public function active($id)
+		{
+			$table = ORM::factory('table', $id);
+			$table->active = 1;
+			$table->save();
+			$this->session->set_flash('apply_message', 'Турнир активирован');
+			url::redirect('admin/tournament/view/'.$table->id);
+		}
+
+		public function deactive($id)
+		{
+			$table = ORM::factory('table', $id);
+			$table->active = 0;
+			$table->save();
+			$this->session->set_flash('apply_message', 'Турнир деактивирован');
+			url::redirect('admin/tournament/view/'.$table->id);
+		}
 	}

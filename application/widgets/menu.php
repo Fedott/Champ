@@ -9,7 +9,7 @@
 			if(Auth::instance()->logged_in())
 			{
 				$user = Auth::instance()->get_user();
-				$teams = ORM::factory('line')->with('table')->with('team')->where(array('user_id' => $user->id))->find_all();
+				$teams = ORM::factory('line')->with('table')->with('team')->where(array('user_id' => $user->id, 'table.active' => 1))->find_all();
 			}
 
 			$tpl = new View('menu');
